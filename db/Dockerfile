@@ -1,5 +1,5 @@
 # Set a variable that can be used in all stages.
-ARG BUILD_HOME=/docker_basic_helloworld
+ARG BUILD_HOME=/docker_basic_db
 # Gradle image for the build stage.
 FROM gradle:jdk21 as build-image
 # Set the working directory.
@@ -22,5 +22,5 @@ COPY --from=build-image $APP_HOME/build/libs/* app.jar
 # The command to run when the container starts.
 ENTRYPOINT java -jar app.jar
 
-# command 2: docker build -t app-name .
-# docker run -p 8080:8080 app-name
+# command 1: docker build -t app-name .
+# command 2: docker run -p 8080:8080 app-name

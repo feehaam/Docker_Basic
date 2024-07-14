@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  docker_basic_db:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5002:5002"
+#    environment:
+#      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/mydatabase
+#      - SPRING_DATASOURCE_USERNAME=root
+#      - SPRING_DATASOURCE_PASSWORD=rootpassword
+    depends_on:
+      - mySQL_DB_for_docker_basic_db
+
+  mySQL_DB_for_docker_basic_db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: db_root_password
+      MYSQL_DATABASE: db_name
+      MYSQL_USER: db_user_name
+      MYSQL_PASSWORD: db_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mySQL_DB_for_docker_basic_db_data:/var/lib/mysql
+
+volumes:
+  mySQL_DB_for_docker_basic_db_data:
